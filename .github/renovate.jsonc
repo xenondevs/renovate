@@ -2,7 +2,7 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "timezone": "Europe/Berlin",
     // first of each month
-    //"schedule": "* * 1 * *",
+    "schedule": "* * 1 * *",
     "enabledManagers": ["github-actions"],
     "packageRules": [
         { "groupName": "renovate", "matchManagers": ["github-actions"] },
