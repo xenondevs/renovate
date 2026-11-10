@@ -1,0 +1,7 @@
+[
+    {
+        "repo": "xenondevs/tessera",
+        "java": "25",
+        "tasks": "help jar sourcesJar :capture:tessera-capture-fabric:jar :capture:tessera-capture-neoforge:jar"
+    }
+]
