@@ -31,4 +31,4 @@ jobs:
         with:
           configurationFile: config.js
           token: ${{ steps.token.outputs.token }}
-          renovate-image: ghcr.io/renovatebot/renovate:44.208.0@sha256:98c66dae501e5bd65e42236c6a79dcc416ad266d6c9b51e28d18c49684f3bb3f
+          renovate-image: renovate/renovate:44.208.0@sha256:98c66dae501e5bd65e42236c6a79dcc416ad266d6c9b51e28d18c49684f3bb3f

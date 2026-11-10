@@ -7,7 +7,7 @@
     "packageRules": [
         { "groupName": "renovate", "matchManagers": ["github-actions"] },
         {
-            "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
+            "matchPackageNames": ["renovate/renovate"],
             "minimumReleaseAge": "7 days",
             "internalChecksFilter": "strict"
         }
