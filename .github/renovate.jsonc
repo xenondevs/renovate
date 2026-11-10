@@ -1,0 +1,15 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "timezone": "Europe/Berlin",
+    // first of each month
+    //"schedule": "* * 1 * *",
+    "enabledManagers": ["github-actions"],
+    "packageRules": [
+        { "groupName": "renovate", "matchManagers": ["github-actions"] },
+        {
+            "matchPackageNames": ["ghcr.io/renovatebot/renovate"],
+            "minimumReleaseAge": "7 days",
+            "internalChecksFilter": "strict"
+        }
+    ]
+}
