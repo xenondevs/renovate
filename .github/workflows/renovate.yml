@@ -1,0 +1,33 @@
+name: renovate
+
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  renovate:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/create-github-app-token@v3.3.0
+        id: token
+        with:
+          client-id: ${{ vars.RENOVATE_CLIENT_ID }}
+          private-key: ${{ secrets.RENOVATE_PRIVATE_KEY }}
+          owner: xenondevs
+          repositories: |
+            renovate
+            tessera
+
+      - uses: renovatebot/github-action@v46.3.13
+        with:
+          configurationFile: config.js
+          token: ${{ steps.token.outputs.token }}
