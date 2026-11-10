@@ -6,4 +6,5 @@ module.exports = {
     platformCommit: 'enabled',
     allowedUnsafeExecutions: [],
     allowedCommands: [],
+    dockerMaxPages: 10,
 };
