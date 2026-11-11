@@ -3,8 +3,8 @@ const MESSAGE = "chore(deps): regenerate gradle verification metadata"
 const INPUTS = '(^|/)[^/]+\.gradle\.kts$|^gradle/libs\.versions\.toml$|^gradle/wrapper/gradle-wrapper\.properties$|^gradle\.properties$'
 
 # Prints the renovate branches whose gradle inputs changed and that have not been regenerated yet as a job matrix.
-def main [config: path] {
-    let matrix = open $config | each {|entry|
+def main [config: path, only: string = ""] {
+    let matrix = open $config | where {|entry| $only in ["" "all"] or $entry.repo == $only } | each {|entry|
         let base = gh api $"repos/($entry.repo)" | from json | get default_branch
         let branches = gh api --paginate $"repos/($entry.repo)/branches" --jq '.[].name' | lines | where {|it| $it starts-with "renovate/" }
 

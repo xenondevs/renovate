@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '17 5 * * *'
   workflow_dispatch:
+    inputs:
+      repo:
+        description: only process this repo
+        type: choice
+        default: all
+        options: [all, xenondevs/renovate, xenondevs/tessera]
 
 permissions: {}
 
@@ -26,6 +32,13 @@ jobs:
           repositories: |
             renovate
             tessera
+
+      - name: Limit to one repo
+        if: ${{ inputs.repo && inputs.repo != 'all' }}
+        shell: bash
+        env:
+          REPO: ${{ inputs.repo }}
+        run: echo "RENOVATE_REPOSITORIES=$REPO" >> "$GITHUB_ENV"
 
       - uses: renovatebot/github-action@v46.3.13
         with:
@@ -57,7 +70,8 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-        run: nu .github/scripts/discover.nu .github/regenerate.json >> "$GITHUB_OUTPUT"
+          ONLY: ${{ inputs.repo }}
+        run: nu .github/scripts/discover.nu .github/regenerate.json "$ONLY" >> "$GITHUB_OUTPUT"
 
   regenerate:
     needs: discover
